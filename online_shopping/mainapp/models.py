@@ -29,7 +29,14 @@ class Product(models.Model):
     price=models.FloatField()
     size=models.CharField(max_length=2,choices=SIZE_CHOICES)
     description=models.TextField()
-    image=models.ImageField(upload_to='product_photo',blank=True)
+    image=None
 
     def __str__(self):  #how to print it
         return self.name
+
+class Image(models.Model):
+    product=models.ForeignKey(Product)
+    image=models.ImageField(upload_to='product_photo', blank=True)
+
+    def __str__(self):
+        return str(self.product)+' '+str(self.image)

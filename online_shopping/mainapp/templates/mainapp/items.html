@@ -28,11 +28,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
       <a href="/shirts/" class="w3-bar-item w3-button">Shirts</a>
       <a href="/dresses/" class="w3-bar-item w3-button">Dresses</a>
-      <a href="#" class="w3-bar-item w3-button">Sweaters</a>
-      <a href="#" class="w3-bar-item w3-button">Coats&Jackets</a>
-      <a href="#" class="w3-bar-item w3-button">Jeans</a>
-      <a href="#" class="w3-bar-item w3-button">Skirts</a>
-      <a href="#" class="w3-bar-item w3-button">Shoes</a>
+      <a href="/sweaters/" class="w3-bar-item w3-button">Sweaters</a>
+      <a href="/coats&jackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
+      <a href="/jeans/" class="w3-bar-item w3-button">Jeans</a>
+      <a href="/skirts/" class="w3-bar-item w3-button">Skirts</a>
+      <a href="/shoes/" class="w3-bar-item w3-button">Shoes</a>
     </div>
     <a onclick="myAccFuncMen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnMen">
       Men <i class="fa fa-caret-down"></i></a>
@@ -66,22 +66,24 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">Shirts</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
+      <div style="background-color:black;color:white;padding:20px;">
+        <p class="w3-right">
+        <i class="fa fa-shopping-cart w3-margin-right"></i>
+        <i class="fa fa-search"></i>
+        </p>
+        <h3 class="w3-wide"><b>{{ title }}</b></h3>
+      </div>
   </header>
 
 <ul>
-    {% for shirt in all_shirts %}
+    {% for item in all_items %}
 
         <div class="w3-col l3 s6">
             <div class="w3-container">
-                 <a href="/shirts/{{ shirt.productID }}/">
-                    <img src="/media/{{shirt.image}}" style="width:280px;height:350px;border:0">
+                 <a href="/{{ name }}/{{ item.productID }}/">
+                    <img src="/media/{{item.image}}" width="280" height="350">
                  </a>
-                <a href="/shirts/{{ shirt.productID }}/"><h3>{{ shirt.name }} <b>${{ shirt.price }}</b></h3></a>
+                <a href="/{{ name }}/{{ item.productID }}/"><h3>{{ item.name }} <b>${{ item.price }}</b></h3></a>
             </div>
         </div>
     {% endfor %}

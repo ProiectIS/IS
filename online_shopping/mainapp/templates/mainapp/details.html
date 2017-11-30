@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>Fashion du Jour</title>
+<title>{{ myItem }}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -28,11 +28,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
       <a href="/shirts/" class="w3-bar-item w3-button">Shirts</a>
       <a href="/dresses/" class="w3-bar-item w3-button">Dresses</a>
-      <a href="#" class="w3-bar-item w3-button">Sweaters</a>
-      <a href="#" class="w3-bar-item w3-button">Coats&Jackets</a>
-      <a href="#" class="w3-bar-item w3-button">Jeans</a>
-      <a href="#" class="w3-bar-item w3-button">Skirts</a>
-      <a href="#" class="w3-bar-item w3-button">Shoes</a>
+      <a href="/sweaters/" class="w3-bar-item w3-button">Sweaters</a>
+      <a href="/coats&jackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
+      <a href="/jeans/" class="w3-bar-item w3-button">Jeans</a>
+      <a href="/skirts/" class="w3-bar-item w3-button">Skirts</a>
+      <a href="/shoes/" class="w3-bar-item w3-button">Shoes</a>
     </div>
     <a onclick="myAccFuncMen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnMen">
       Men <i class="fa fa-caret-down"></i></a>
@@ -66,30 +66,40 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">Dresses</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
+      <div style="background-color:black;color:white;padding:20px;">
+       <p class="w3-right" >
+            <i class="fa fa-shopping-cart w3-margin-right"></i>
+            <i class="fa fa-search"></i>
+        </p>
+      <h3 class="w3-wide"><b>{{ myItem }}</b></h3>
+      </div>
   </header>
 
-<ul>
-    {% for dress in all_dresses %}
 
-        <div class="w3-col l3 s6">
-            <div class="w3-container">
-                 <a href="/dresses/{{ dress.productID }}/">
-                    <img src="/media/{{dress.image}}" style="width:280px;height:350px;border:0">
-                 </a>
-                <a href="/dresses/{{ dress.productID }}/"><h3>{{ dress.name }} <b>${{ dress.price }}</b></h3></a>
-            </div>
-        </div>
-    {% endfor %}
+  <!-- BODY -->
+<ul>
+  <div class="w3-left-align w3-padding " style="max-width:1200px;margin-top:10px">
+  <div class="w3-row-padding w3-padding-16 w3-center ">
+      {% for img in my_images %}
+    <div class="w3-quarter ">
+      <img src="/media/{{ img }}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" >
+    </div>
+      {% endfor %}
+
+  </div>
+  </div>
+
 </ul>
 
-  <!-- End page content -->
-</div>
+    <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+    <span class="w3-button w3-large w3-black w3-display-topright" title="Close"><i class="fa fa-remove"></i></span>
+    <div class="w3-modal-content w3-animaste-zoom w3-center w3-transparent w3-padding-64">
+        <img id="img01" class="w3-image">
+        <p id="caption" class="w3-opacity w3-large"></p>
+    </div>
+    </div>
 
+</div>
 
 
 <script>
@@ -126,6 +136,12 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
+}
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
 }
 </script>
 
