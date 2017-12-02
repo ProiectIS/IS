@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from django.core.urlresolvers import reverse
 import random,os
 # Create your models here.
 
@@ -40,3 +41,17 @@ class Image(models.Model):
 
     def __str__(self):
         return str(self.product)+' '+str(self.image)
+
+class Customer(models.Model):
+    first_name=models.CharField(max_length=30)
+    second_name=models.CharField(max_length=30)
+    email=models.CharField(max_length=30)
+    phone=models.CharField(max_length=12)
+    address=models.CharField(max_length=100)
+    password=models.CharField(max_length=20)
+
+    def __str__(self):  #how to print it
+        return self.first_name+' '+self.second_name
+
+    def get_absolute_url(self):
+        return reverse('mainapp:customer_profile',kwargs={'pk':self.pk})
