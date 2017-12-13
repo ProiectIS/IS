@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^shoes/(?P<shoe_id>[0-9]+)/$', views.shoe_detail, name='shoe_detail'),
     url(r'^shoes/',views.ShoesView.as_view(),name='shoes_page'),
     url(r'^cart/',views.cart_page,name='cart_page'),
-    url(r'^customer_form/',views.CustomerCreate.as_view(),name='customer-add'),
-    url(r'^customer_profile/(?P<pk>[0-9]+)/$',views.customer_profile,name='customer_profile'),
+    #url(r'^customer_form/',views.CustomerCreate.as_view(),name='customer-add'),
+    url(r'^register/',views.register,name='register'),
+    url(r'^profile/(?P<id>[0-9]+)/$',views.profile,name='profile'),
     url(r'^log_in/',views.log_in_page,name='log_in_page')
 ]

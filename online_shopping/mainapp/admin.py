@@ -16,3 +16,5 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [InlineImage]
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Customer)
+

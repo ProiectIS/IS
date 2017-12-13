@@ -3,6 +3,10 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
 import random,os
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 # Create your models here.
 
 def get_filename_ext(filepath):
@@ -43,15 +47,18 @@ class Image(models.Model):
         return str(self.product)+' '+str(self.image)
 
 class Customer(models.Model):
+    user = models.OneToOneField(User)
+    username = models.CharField(max_length=30)
     first_name=models.CharField(max_length=30)
-    second_name=models.CharField(max_length=30)
+    last_name=models.CharField(max_length=30)
     email=models.CharField(max_length=30)
-    phone=models.CharField(max_length=12)
-    address=models.CharField(max_length=100)
+    #phone=models.CharField(max_length=12)
+    #address=models.CharField(max_length=100)
     password=models.CharField(max_length=20)
 
     def __str__(self):  #how to print it
-        return self.first_name+' '+self.second_name
+       return self.first_name
 
     def get_absolute_url(self):
-        return reverse('mainapp:customer_profile',kwargs={'pk':self.pk})
+        return reverse('mainapp:profile',kwargs={'id':self.pk})
+

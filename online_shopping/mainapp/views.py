@@ -1,10 +1,14 @@
 from __future__ import unicode_literals
 from django.shortcuts import render,get_object_or_404
 from mainapp.models import Product,Image,Customer
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import generic
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from .forms import RegistrationForm
 # Create your views here.
 
 def first_page(request):
@@ -169,13 +173,55 @@ def log_in_page(request):
 
 #--------------------------------------------------------------------
 
-class CustomerCreate(CreateView):
-    model = Customer
-    fields = ['first_name','second_name','email','phone','address','password']
+#class CustomerCreate(CreateView):
+ #   model = Customer
+  #  fields = ['first_name','second_name','email','phone','address','password']
 
 
-def customer_profile(request,pk):
-    customer=get_object_or_404(Customer,pk=pk)
-    return render(request, 'mainapp/customer_profile.html', {'customer':customer})
+#def customer_profile(request,pk):
+ #   customer=get_object_or_404(Customer,pk=pk)
+  #  return render(request, 'mainapp/customer_profile.html', {'customer':customer})
+
+
+#------------------------------------------------------------------
+
+
+def register(request):
+    if request.method=='POST':
+        form=RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            first_name=form['first_name'].value()
+            last_name=form['last_name'].value()
+            username=form['username'].value()
+            email=form['email'].value()
+            password=form['password1'].value()
+            user=form.save()
+            customer=Customer(user=user,username=username,first_name=first_name,last_name=last_name,email=email,password=password)
+            customer.save()
+            return redirect('/profile/'+str(customer.pk))
+        else:
+            args = {'form': form}
+            return render(request, 'mainapp/customer_form.html', args)
+    else:
+        form=RegistrationForm()
+        args={'form':form}
+        return render(request,'mainapp/customer_form.html',args)
+
+
+
+def profile(request,id):
+    #args={'user':request.user}
+    customer = get_object_or_404(Customer, pk=id)
+    print customer.first_name
+    return render(request,'mainapp/customer_profile.html',{'user':customer})
+
+
+
+
+
+
+
+
 
 
