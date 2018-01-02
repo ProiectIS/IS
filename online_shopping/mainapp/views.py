@@ -6,21 +6,20 @@ from django.template import loader
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.contrib.auth import authenticate,login
 from .forms import RegistrationForm
 # Create your views here.
 
 def first_page(request):
-    return render(request,'mainapp/main.html',locals())
+    return render(request,'mainapp/main.html',None)
 
 def prod_table(request):
     query_results=Product.objects.all()
-    return render(request,'mainapp/prodTable.html',locals())
+    return render(request,'mainapp/prodTable.html',None)
 
 def cust_table(request):
     query_results=Customer.objects.all()
-    return render(request,'mainapp/custTable.html',locals())
+    return render(request,'mainapp/custTable.html',None)
 
 def full_page(category):
     all_images = Image.objects.all()
@@ -39,7 +38,6 @@ class ShirtsView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ShirtsView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "SHIRTS"
         context['name'] = "shirts"
         return context
@@ -52,7 +50,6 @@ class DressesView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(DressesView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "DRESSES"
         context['name'] = "dresses"
         return context
@@ -66,7 +63,6 @@ class SweatersView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SweatersView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "SWEATERS"
         context['name'] = "sweaters"
         return context
@@ -80,7 +76,6 @@ class CoatsView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CoatsView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "COATS"
         context['name'] = "coats&jackets"
         return context
@@ -94,7 +89,6 @@ class SkirtsView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SkirtsView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "SKIRTS"
         context['name'] = "skirts"
         return context
@@ -108,7 +102,6 @@ class JeansView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(JeansView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "JEANS"
         context['name'] = "jeans"
         return context
@@ -121,7 +114,6 @@ class ShoesView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ShoesView, self).get_context_data(**kwargs)
-        # Add in the publisher
         context['title'] = "SHOES"
         context['name'] = "shoes"
         return context
@@ -165,41 +157,23 @@ def shoe_detail(request,shoe_id):
 #---------------------------------------------------------------------
 
 def cart_page(request):
-    return render(request, 'mainapp/cart.html', locals())
-
-
-def log_in_page(request):
-    return render(request, 'mainapp/log_in.html', locals())
-
-#--------------------------------------------------------------------
-
-#class CustomerCreate(CreateView):
- #   model = Customer
-  #  fields = ['first_name','second_name','email','phone','address','password']
-
-
-#def customer_profile(request,pk):
- #   customer=get_object_or_404(Customer,pk=pk)
-  #  return render(request, 'mainapp/customer_profile.html', {'customer':customer})
-
-
-#------------------------------------------------------------------
+    return render(request, 'mainapp/cart.html', None)
 
 
 def register(request):
     if request.method=='POST':
         form=RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save()
             first_name=form['first_name'].value()
             last_name=form['last_name'].value()
             username=form['username'].value()
             email=form['email'].value()
             password=form['password1'].value()
-            user=form.save()
             customer=Customer(user=user,username=username,first_name=first_name,last_name=last_name,email=email,password=password)
             customer.save()
-            return redirect('/profile/'+str(customer.pk))
+            return redirect('/log_in/')
+           # return redirect('/profile/'+str(customer.pk))
         else:
             args = {'form': form}
             return render(request, 'mainapp/customer_form.html', args)
@@ -212,10 +186,19 @@ def register(request):
 
 def profile(request,id):
     #args={'user':request.user}
-    customer = get_object_or_404(Customer, pk=id)
-    print customer.first_name
+    customer = get_object_or_404(User, pk=id)
     return render(request,'mainapp/customer_profile.html',{'user':customer})
 
+#------------------------------------------------------------------------------------------------
+
+def stores(request):
+    return render(request, 'mainapp/stores.html', None)
+
+def policies(request):
+    return render(request, 'mainapp/policies.html', None)
+
+def contact(request):
+    return render(request, 'mainapp/contact.html', None)
 
 
 

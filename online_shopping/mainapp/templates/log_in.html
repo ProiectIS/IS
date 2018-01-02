@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>Fashion du Jour</title>
+<title>Log in</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -22,6 +22,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>FDJ</b></h3></a>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a href="#" class="w3-bar-item w3-button">Last Week</a>
     <a onclick="myAccFuncWomen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnWomen">
       Women <i class="fa fa-caret-down"></i></a>
     <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
@@ -44,56 +45,52 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </div>
 </nav>
-
+<!-- Top menu on small screens -->
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:235px">
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
 
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
+<header class="w3-bar w3-top w3-black w3-xlarge">
       <div style="background-color:black;color:white;padding:20px;">
-         {% if user.username == 'georgiana' %}
-        <p class="w3-right">
-        <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-        <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-        </p>
-          {% else %}
-          {% if user.pk == None %}
-                <p class="w3-right">
-                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-                </p>
-          {% else %}
-            <h3 class="w3-right">
-            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
-            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
-            </h3>
-          {% endif %}
-      {% endif %}
-        <h3 class="w3-wide"><b>{{ title }}</b></h3>
+        <a href="/main/" class="w3-right" style="text-decoration:none;font-size:70%;">Back to the site</a>
+        <h3 class="w3-wide  w3-center"><b>LOG IN</b></h3>
       </div>
-  </header>
+</header>
 
-<ul>
-    {% for item in object_list %}
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
+  <!-- The Grid -->
 
-        <div class="w3-col l3 s6">
-            <div class="w3-container">
-                 <a href="/{{ name }}/{{ item.productID }}/">
-                    <img src="/media/{{item.image}}" width="280" height="350">
-                 </a>
-                <a href="/{{ name }}/{{ item.productID }}/"><h3>{{ item.name }} <b>${{ item.price }}</b></h3></a>
-            </div>
+  <div class="w3-row-padding" >
+    <!-- Left Column -->
+    <div class="w3-third ">
+      <div class="w3-white  w3-card-4" >
+          <div class="w3-display-position w3-padding " style="top:100px;left:235px">
+        <div class="w3-display-container">
+        <div class="w3-container ">
+
+          <form action="" method="post" target="_blank">
+            <h3>Please fill in your informations</h3>
+            {% csrf_token %}
+            {{ form.as_p }}
+                <div class="col-sm-offset-2">
+                    <button type="submit" class="w3-black w3-large">Login</button>
+                </div>
+        </form>
         </div>
-    {% endfor %}
-</ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
   <!-- End page content -->
 </div>
-
 
 
 <script>

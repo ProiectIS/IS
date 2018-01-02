@@ -4,8 +4,6 @@ from django.db import models
 from django.core.urlresolvers import reverse
 import random,os
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 # Create your models here.
 
@@ -60,5 +58,5 @@ class Customer(models.Model):
        return self.first_name
 
     def get_absolute_url(self):
-        return reverse('mainapp:profile',kwargs={'id':self.pk})
+        return reverse('mainapp:profile',kwargs={'id':self.pk})  #to reach the profile page of the customer
 

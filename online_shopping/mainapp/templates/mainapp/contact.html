@@ -48,52 +48,37 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:235px">
-
-  <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
       <div style="background-color:black;color:white;padding:20px;">
-         {% if user.username == 'georgiana' %}
-        <p class="w3-right">
-        <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-        <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-        </p>
-          {% else %}
-          {% if user.pk == None %}
-                <p class="w3-right">
-                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-                </p>
-          {% else %}
-            <h3 class="w3-right">
-            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
-            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
-            </h3>
-          {% endif %}
-      {% endif %}
-        <h3 class="w3-wide"><b>{{ title }}</b></h3>
+        <h3 class="w3-wide"><b>CONTACT US</b></h3>
       </div>
   </header>
 
-<ul>
-    {% for item in object_list %}
 
-        <div class="w3-col l3 s6">
-            <div class="w3-container">
-                 <a href="/{{ name }}/{{ item.productID }}/">
-                    <img src="/media/{{item.image}}" width="280" height="350">
-                 </a>
-                <a href="/{{ name }}/{{ item.productID }}/"><h3>{{ item.name }} <b>${{ item.price }}</b></h3></a>
-            </div>
-        </div>
-    {% endfor %}
-</ul>
+  <!-- BODY -->
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
 
-  <!-- End page content -->
+  <!-- The Grid -->
+  <div class="w3-display-position w3-padding " style="top:100px;left:235px">
+      <p>Your questions and comments are important to us. Our customer service team is available to answer any of your questions.
+          Please be advised that our current response time is within 12 business hours.
+      </p>
+      <h2>Email address:</h2>
+      <p > georgi.maria.96@gmail.com</p>
+      <h2>Phone number:</h2>
+      <p> 0736264767</p>
+      <h4>OPENING HOURS:</h4>
+      <p> Monday to Friday: 7am to 12am</p>
+      <p> Saturday and Sunday: 9am to 12am</p>
+    <button  class="w3-black w3-xlarge">
+            <a href="/main/" style="text-decoration:none;font-size:80%;" > Back to the main page</a>
+    </button>
+  </div>
 </div>
-
+</div>
 
 
 <script>
@@ -131,6 +116,8 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+
+
 </script>
 
 </body>

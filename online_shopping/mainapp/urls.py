@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from django.contrib.auth.views import login,logout
 
 urlpatterns = [
     url(r'^$',views.first_page,name='first_page'),
@@ -25,5 +26,10 @@ urlpatterns = [
     #url(r'^customer_form/',views.CustomerCreate.as_view(),name='customer-add'),
     url(r'^register/',views.register,name='register'),
     url(r'^profile/(?P<id>[0-9]+)/$',views.profile,name='profile'),
-    url(r'^log_in/',views.log_in_page,name='log_in_page')
+   # url(r'^log_in/',views.log_in_page,name='log_in_page')
+    url(r'^log_in/',login,{'template_name':'log_in.html'}),
+    url(r'^log_out/',logout,{'template_name':'log_out.html'}),
+    url(r'^stores/', views.stores, name='stores'),
+    url(r'^policies/', views.policies, name='policies'),
+    url(r'^contact/', views.contact, name='contact')
 ]

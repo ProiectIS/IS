@@ -19,10 +19,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>Fashion Du Jour</b></h3></a>
+    <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>FDJ</b></h3></a>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a href="#" class="w3-bar-item w3-button">Last Week</a>
     <a onclick="myAccFuncWomen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnWomen">
       Women <i class="fa fa-caret-down"></i></a>
     <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
@@ -44,9 +43,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <a href="#" class="w3-bar-item w3-button">Shoes</a>
     </div>
   </div>
-  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">Newsletter</a>
-  <a href="#footer"  class="w3-bar-item w3-button w3-padding">Subscribe</a>
 </nav>
 
 
@@ -59,11 +55,24 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
       <div style="background-color:black;color:white;padding:20px;">
-       <p class="w3-right" >
-        <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
+       {% if user.username == 'georgiana' %}
+        <p class="w3-right">
         <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
         <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
         </p>
+          {% else %}
+          {% if user.pk == None %}
+                <p class="w3-right">
+                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
+                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
+                </p>
+          {% else %}
+            <h3 class="w3-right">
+            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
+            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
+            </h3>
+          {% endif %}
+      {% endif %}
       <h3 class="w3-wide"><b>{{ myItem }}</b></h3>
       </div>
   </header>

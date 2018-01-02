@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>Fashion du Jour</title>
+<title>Policies</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -48,52 +48,40 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:235px">
-
-  <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
       <div style="background-color:black;color:white;padding:20px;">
-         {% if user.username == 'georgiana' %}
-        <p class="w3-right">
-        <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-        <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-        </p>
-          {% else %}
-          {% if user.pk == None %}
-                <p class="w3-right">
-                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-                </p>
-          {% else %}
-            <h3 class="w3-right">
-            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
-            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
-            </h3>
-          {% endif %}
-      {% endif %}
-        <h3 class="w3-wide"><b>{{ title }}</b></h3>
+        <h3 class="w3-wide"><b>HELP CENTER</b></h3>
       </div>
   </header>
 
-<ul>
-    {% for item in object_list %}
 
-        <div class="w3-col l3 s6">
-            <div class="w3-container">
-                 <a href="/{{ name }}/{{ item.productID }}/">
-                    <img src="/media/{{item.image}}" width="280" height="350">
-                 </a>
-                <a href="/{{ name }}/{{ item.productID }}/"><h3>{{ item.name }} <b>${{ item.price }}</b></h3></a>
-            </div>
-        </div>
-    {% endfor %}
-</ul>
+  <!-- BODY -->
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
 
-  <!-- End page content -->
+  <!-- The Grid -->
+  <div class="w3-display-position w3-padding " style="top:100px;left:235px">
+      <h2>About</h2>
+      <p>FDJ is a global fashion destination for 20-somethings. We sell cutting-edge fashion and offer a wide variety of fashion-related content.</p>
+      <h2>Payment</h2>
+      <p>Right now we only accept the cash payment on delivery.</p>
+      <h2>Delivery</h2>
+      <p>We know how important it is to receive your goods when you expect them, especially if you've ordered something for a specific occasion, and we use a large network of couriers to deliver goods.
+          We allocate the courier to deliver your order based on the delivery method selected and the value of your order.
+          Delivery is within 3 working days from the moment you submit your order.
+           If your order is above £20.00, no delivery charge will be applied. If your order value is less than this, the delivery charge is £3.00.</p>
+      <h2>Returns</h2>
+      <p>You can return your item for an exchange within 28 days, as long as the new item has the same product code as the original product you ordered.
+          If you want to exchange for a different colour, the price of both colours must be the same as the price at which you bought the original product.
+      If the item is out of stock in the size or colour you have opted for, then a refund will be processed instead.</p>
+      <button  class="w3-black w3-xlarge">
+            <a href="/main/" style="text-decoration:none;font-size:80%;" > Back to the main page</a>
+      </button>
+  </div>
 </div>
-
+</div>
 
 
 <script>
@@ -131,6 +119,8 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+
+
 </script>
 
 </body>

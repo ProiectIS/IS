@@ -23,4 +23,3 @@ class RegistrationForm(UserCreationForm):  #extend UserCreationForm and add extr
 
         return user
 
-
