@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 import random,os
 from django.contrib.auth.models import User
 
+
+
 # Create your models here.
 
 def get_filename_ext(filepath):
@@ -20,17 +22,27 @@ def upload_image_path(self,instance,filename):
             new_filename = new_filename,
             final_filename = final_filename
             )
-GENDER_CHOICES = ( ('M','Male'), ('F', 'Female'))
-SIZE_CHOICES = (('XS','XS'),('S','S'),('M','M'),('L','L'))
-CLOTHES_CHOICES=(('Shirt','Shirts'),('Dress','Dresses'),('Sweater','Sweaters'),('Coat','Coat&Jackets'),('Jeans','Jeans'),('Skirt','Skirts'),('Shoes','Shoes'))
+
+MY_CHOICES = (
+    ('Female', (
+        ('Shirt', 'Shirts'), ('Dress', 'Dresses'), ('Sweater', 'Sweaters'), ('Coat', 'Coat&Jackets'),
+        ('Jeans', 'Jeans'), ('Skirt', 'Skirts')
+        )
+    ),
+    ('Male', (
+        ('Tshirts', 'Tshirts'), ('Hoodies', 'Hoodies'), ('MJeans', 'Jeans'), ('MCoats', 'Coats')
+        )
+    ),
+)
 class Product(models.Model):
-    category = models.CharField(choices=CLOTHES_CHOICES,max_length=20)
-    name = models.CharField(max_length=50)
+    category = models.CharField(choices=MY_CHOICES,max_length=20)
+    name = models.CharField(unique=True,max_length=50)
     productID=models.AutoField(primary_key=True)
-    sex=models.CharField(max_length=10,choices=GENDER_CHOICES)
-    amount=models.IntegerField()
     price=models.FloatField()
-    size=models.CharField(max_length=2,choices=SIZE_CHOICES)
+    size_XS_amount= models.PositiveIntegerField()
+    size_S_amount = models.PositiveIntegerField()
+    size_M_amount = models.PositiveIntegerField()
+    size_L_amount = models.PositiveIntegerField()
     description=models.TextField()
     image=None
 
@@ -59,4 +71,6 @@ class Customer(models.Model):
 
     def get_absolute_url(self):
         return reverse('mainapp:profile',kwargs={'id':self.pk})  #to reach the profile page of the customer
+
+#TO DO: add address + phone
 

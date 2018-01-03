@@ -32,16 +32,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <a href="/coats&jackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
       <a href="/jeans/" class="w3-bar-item w3-button">Jeans</a>
       <a href="/skirts/" class="w3-bar-item w3-button">Skirts</a>
-      <a href="/shoes/" class="w3-bar-item w3-button">Shoes</a>
     </div>
     <a onclick="myAccFuncMen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnMen">
       Men <i class="fa fa-caret-down"></i></a>
     <div id="demoAccMen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="#" class="w3-bar-item w3-button">T-Shirts</a>
-      <a href="#" class="w3-bar-item w3-button">Sweats&Hoodies</a>
-      <a href="#" class="w3-bar-item w3-button">Jeans</a>
-      <a href="#" class="w3-bar-item w3-button">Coats&Jackets</a>
-      <a href="#" class="w3-bar-item w3-button">Shoes</a>
+      <a href="/tshirts/" class="w3-bar-item w3-button">T-Shirts</a>
+      <a href="/hoodies/" class="w3-bar-item w3-button">Sweats&Hoodies</a>
+      <a href="/Mjeans/" class="w3-bar-item w3-button">Jeans</a>
+      <a href="/Mjackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
     </div>
   </div>
 </nav>
@@ -73,21 +71,18 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
                 </p>
           {% else %}
             <h3 class="w3-right">
-            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
+            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My account /</a>
             <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
             </h3>
           {% endif %}
       {% endif %}
-        <h3 class="w3-wide"><b>NEW ARRIVALS</b></h3>
+        <h3 class="w3-wide"><b>NEW ARRIVALS!!</b></h3>
       </div>
   </header>
 
   <!-- Image header -->
   <div class="w3-display-container w3-container">
     <img src="{% static "images/model_on_sofa.jpg" %}" alt="Classy Look" style="width:100%">
-    <div class="w3-display-topleft w3-text-black" style="padding:0px 30px">
-      <h1 class="w3-hide-small">SPRING COLLECTION 2018</h1>
-    </div>
   </div>
 
 

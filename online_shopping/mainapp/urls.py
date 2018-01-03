@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^prodTable/',views.prod_table,name='prod_table'),
     url(r'^custTable/', views.cust_table, name='cust_table'),
     url(r'^main/',views.first_page,name='first_page'),
-    # /shirts/id
+    # women
     url(r'^shirts/(?P<shirt_id>[0-9]+)/$', views.shirt_detail, name='shirt_detail'),
     url(r'^shirts/',views.ShirtsView.as_view(),name='shirts_page'),
     url(r'^dresses/(?P<dress_id>[0-9]+)/$', views.dress_detail, name='dress_detail'),
@@ -20,16 +20,23 @@ urlpatterns = [
     url(r'^jeans/',views.JeansView.as_view(),name='jeans_page'),
     url(r'^skirts/(?P<skirt_id>[0-9]+)/$', views.skirt_detail, name='skirt_detail'),
     url(r'^skirts/',views.SkirtsView.as_view(),name='skirts_page'),
-    url(r'^shoes/(?P<shoe_id>[0-9]+)/$', views.shoe_detail, name='shoe_detail'),
-    url(r'^shoes/',views.ShoesView.as_view(),name='shoes_page'),
     url(r'^cart/',views.cart_page,name='cart_page'),
-    #url(r'^customer_form/',views.CustomerCreate.as_view(),name='customer-add'),
+    #others
     url(r'^register/',views.register,name='register'),
     url(r'^profile/(?P<id>[0-9]+)/$',views.profile,name='profile'),
-   # url(r'^log_in/',views.log_in_page,name='log_in_page')
     url(r'^log_in/',login,{'template_name':'log_in.html'}),
     url(r'^log_out/',logout,{'template_name':'log_out.html'}),
     url(r'^stores/', views.stores, name='stores'),
     url(r'^policies/', views.policies, name='policies'),
-    url(r'^contact/', views.contact, name='contact')
+    url(r'^contact/', views.contact, name='contact'),
+    #men
+    url(r'^tshirts/(?P<tshirt_id>[0-9]+)/$', views.tshirt_detail, name='tshirt_detail'),
+    url(r'^tshirts/',views.TshirtView.as_view(),name='tshirts_page'),
+    url(r'^hoodies/(?P<hoodie_id>[0-9]+)/$', views.hoodie_detail, name='hoodie_detail'),
+    url(r'^hoodies/', views.HoodieView.as_view(), name='hoodie_page'),
+    url(r'^Mjeans/(?P<Mjean_id>[0-9]+)/$', views.Mjeans_detail, name='Mjeans_detail'),
+    url(r'^Mjeans/', views.MjeansView.as_view(), name='Mjeans_page'),
+    url(r'^Mjackets/(?P<Mjacket_id>[0-9]+)/$', views.Mjackets_detail, name='Mjackets_detail'),
+    url(r'^Mjackets/', views.MjacketsView.as_view(), name='Mjackets_page'),
+
 ]

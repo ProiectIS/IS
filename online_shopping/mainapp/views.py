@@ -6,7 +6,6 @@ from django.template import loader
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
 from .forms import RegistrationForm
 # Create your views here.
 
@@ -20,7 +19,8 @@ def prod_table(request):
 def cust_table(request):
     query_results=Customer.objects.all()
     return render(request,'mainapp/custTable.html',None)
-
+#------------------------------------------------------------------
+#---------WOMEN----------------------------------------------------
 def full_page(category):
     all_images = Image.objects.all()
     all_items = []
@@ -106,18 +106,6 @@ class JeansView(generic.ListView):
         context['name'] = "jeans"
         return context
 
-class ShoesView(generic.ListView):
-    template_name = 'mainapp/items.html'
-
-    def get_queryset(self):
-        return full_page("Shoes")
-
-    def get_context_data(self, **kwargs):
-        context = super(ShoesView, self).get_context_data(**kwargs)
-        context['title'] = "SHOES"
-        context['name'] = "shoes"
-        return context
-
 #--------------------------------------------------------------------------
 
 def details(request,category,item_id):
@@ -152,10 +140,75 @@ def jean_detail(request,jean_id):
 def skirt_detail(request,skirt_id):
     return details(request,"Skirt", skirt_id)
 
-def shoe_detail(request,shoe_id):
-    return details(request,"Shoes", shoe_id)
+#---------------------------------------------------------------------
+#-------------MEN----------------------------------------------------
+
+class TshirtView(generic.ListView):
+    template_name = 'mainapp/items.html'
+
+    def get_queryset(self):
+        return full_page("Tshirts")
+
+    def get_context_data(self, **kwargs):
+        context = super(TshirtView, self).get_context_data(**kwargs)
+        context['title'] = "T-SHIRTS"
+        context['name'] = "tshirts"    # URL : /tshirts/..
+        return context
+
+
+class HoodieView(generic.ListView):
+    template_name = 'mainapp/items.html'
+
+    def get_queryset(self):
+        return full_page("Hoodies")
+
+    def get_context_data(self, **kwargs):
+        context = super(HoodieView, self).get_context_data(**kwargs)
+        context['title'] = "HOODIES"
+        context['name'] = "hoodies"
+        return context
+
+
+class MjeansView(generic.ListView):
+    template_name = 'mainapp/items.html'
+
+    def get_queryset(self):
+        return full_page("Mjeans")
+
+    def get_context_data(self, **kwargs):
+        context = super(MjeansView, self).get_context_data(**kwargs)
+        context['title'] = "JEANS"
+        context['name'] = "Mjeans"
+        return context
+
+class MjacketsView(generic.ListView):
+    template_name = 'mainapp/items.html'
+
+    def get_queryset(self):
+        return full_page("MCoats")
+
+    def get_context_data(self, **kwargs):
+        context = super(MjacketsView, self).get_context_data(**kwargs)
+        context['title'] = "COATS & JACKETS"
+        context['name'] = "Mjackets"
+        return context
+
+
 #---------------------------------------------------------------------
 
+def tshirt_detail(request,tshirt_id):
+    return details(request,"Tshirts",tshirt_id)
+
+def hoodie_detail(request,hoodie_id):
+    return details(request,"Hoodies",hoodie_id)
+
+def Mjeans_detail(request,Mjean_id):
+    return details(request,"MJeans",Mjean_id)
+
+def Mjackets_detail(request,Mjacket_id):
+    return details(request,"MCoats",Mjacket_id)
+
+#------------------------------------------------------------------------------
 def cart_page(request):
     return render(request, 'mainapp/cart.html', None)
 
@@ -199,6 +252,9 @@ def policies(request):
 
 def contact(request):
     return render(request, 'mainapp/contact.html', None)
+
+
+
 
 
 
