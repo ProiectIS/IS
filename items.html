@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>{{ myItem }}</title>
+<title>Fashion du Jour</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -53,7 +53,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
       <div style="background-color:black;color:white;padding:20px;">
-       {% if user.username == 'georgiana' %}
+         {% if user.username == 'georgiana' %}
         <p class="w3-right">
         <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
         <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
@@ -89,63 +89,26 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
             </h3>
           {% endif %}
       {% endif %}
-      <h3 class="w3-wide"><b>{{ myItem }}</b></h3>
+        <h3 class="w3-wide"><b>{{ title }}</b></h3>
       </div>
   </header>
 
-
-  <!-- BODY -->
 <ul>
-  <div class="w3-left-align w3-padding " style="max-width:1200px;margin-top:10px">
-  <div class="w3-row-padding w3-padding-16 w3-center ">
-      <div class="w3-quarter " style="width:48%">
-      {% for img in my_images %}
-      <img src="/media/{{ img }}" style="width:40%" onclick="onClick(this)" class="w3-hover-opacity" style="margin-right:20px; margin-bottom:20px; margin-top:20px" >
-      {% endfor %}
-          <div> <span class="price" ><strong>${{myItem.price}}</strong></span></div>
-      </div>
-
-      <div class="w3-left-align w3-padding product-description " style="width:100%; max-width:auto;">
-          <div class="left-arrow"></div>
-          <div class="product-category">Category: <strong>{{myItem.category}}</strong></div>
-          <div class="product-id">Product ID: <strong>{{myItem.productID}}</strong></div>
-          <h2 class="product-name">{{myItem}}</h2>
-          <div class="product-addToCard">
-              <!--<span>Select your size: </span>
-              <select name="size" required="" id="id_size">
-                    <option value="" selected="">---------</option>
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-              </select>-->
-
-
-              <div class="buy">
-                  <form action="{% url "mainapp:cart_add" myItem.productID%}" method="post"  style="margin-left:90px">
-                            {% csrf_token %}
-                            {{ cart_product_form }}
-                                <button type="submit" class="btn btn-success btn-product">Add to cart</button>
-
-                        </form>
-              </div>
-          </div>
-          <p><strong>Description:</strong><br/>{{myItem.description}}</p>
-  </div>
-  </div>
-  </div>
-
+<div class="w3-row ">
+    {% for item in object_list %}
+        <div class="w3-third w3-container">
+                 <a href="/{{ name }}/{{ item.productID }}/">
+                    <img src="/media/{{item.image}}" width="280" height="350">
+                 </a>
+                <a href="/{{ name }}/{{ item.productID }}/" style="text-decoration:none"><h3 style="font-size:120%;" >{{ item.name }} <b>${{ item.price }}</b></h3></a>
+        </div>
+    {% endfor %}
+</div>
 </ul>
 
-    <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
-    <span class="w3-button w3-large w3-black w3-display-topright" title="Close"><i class="fa fa-remove"></i></span>
-    <div class="w3-modal-content w3-animaste-zoom w3-center w3-transparent w3-padding-64">
-        <img id="img01" class="w3-image">
-        <p id="caption" class="w3-opacity w3-large"></p>
-    </div>
-    </div>
-
+  <!-- End page content -->
 </div>
+
 
 
 <script>
@@ -182,12 +145,6 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
-}
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
 }
 </script>
 
