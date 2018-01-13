@@ -3,11 +3,13 @@ from . import views
 from django.contrib.auth.views import login,logout
 
 urlpatterns = [
-    url(r'^$',views.first_page,name='first_page'),
+    url(r'^$',views.intro_page,name='intro_page'),
+    url(r'^intro',views.intro_page,name='intro_page'),
     url(r'^prodTable/',views.prod_table,name='prod_table'),
     url(r'^custTable/', views.cust_table, name='cust_table'),
     url(r'^orderTable/', views.order_table, name='order_table'),
     url(r'^main/',views.first_page,name='first_page'),
+    url(r'^order_place_succ', views.order_place_succ,name='order_place_succ'),
     # women
     url(r'^shirts/(?P<shirt_id>[0-9]+)/$', views.shirt_detail, name='shirt_detail'),
     url(r'^shirts/',views.ShirtsView.as_view(),name='shirts_page'),
@@ -47,5 +49,6 @@ urlpatterns = [
     url(r'^order_create/', views.order_create, name='order_create'),
     url(r'^place_order', views.place_order,name='place_order'),
 
-    url(r'^(?P<product_id>[0-9]+)/$', views.product_detail, name='product_detail')
-]
+    url(r'^(?P<product_id>[0-9]+)/$', views.product_detail, name='product_detail'),
+
+    ]

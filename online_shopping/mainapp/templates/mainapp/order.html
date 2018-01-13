@@ -88,7 +88,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
  <form action="." method="post" class="order-form" style="margin-left:200px">
      {{form.as_p }}
-     <a href="/main/" class="w3-top-right"><button type="submit" class="w3-black w3-large">PlaceOrder</button></a>
+     <button type="submit" class="w3-black w3-large">CheckOrder</button></a>
+     <button type="submit" class="w3-black w3-large"><a href="/order_place_succ/" class="w3-top-right">PlaceOrde</button> </a>
      <button type="submit" class="w3-black w3-large"><a href="/main/" class="w3-top-right">Main</a></button>
      {% csrf_token %}
  </form>

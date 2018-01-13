@@ -2,7 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>Log in</title>
+<title>Oder Placed</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -15,11 +15,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <body>
 
+
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <a href="/intro/" class="w3-wide" style="text-decoration:none"><h3><b>FDJ</b></h3></a>
+    <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>FDJ</b></h3></a>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
     <a onclick="myAccFuncWomen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnWomen">
@@ -45,45 +46,35 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- Top menu on small screens -->
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:235px;margin-right:0px">
+<div class="w3-main" style="margin-left:235px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
 
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+      <div style="background-color:black;color:white;padding:50px;">
 
-
-<div class="w3-main" style="margin-left:235px;margin-right:0px">
-  <!-- The Grid -->
-
-  <div class="w3-row-padding" >
-    <!-- Left Column -->
-    <div class="w3-third ">
-      <div class="w3-white  w3-card-4" >
-          <div class="w3-display-position w3-padding " style="top:100px;left:235px">
-        <div class="w3-display-container">
-        <div class="w3-container ">
-
-          <form action="" method="post" target="_blank">
-            <h3>Please fill in your informations</h3>
-            {% csrf_token %}
-            {{ form.as_p }}
-                <div class="col-sm-offset-2">
-                    <button type="submit" class="w3-black w3-large">Login</button>
-                </div>
-        </form>
-        </div>
-        </div>
       </div>
-    </div>
-  </div>
+  </header>
+
+
+  <!-- BODY -->
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+    <!-- Left Column -->
+        <div class="w3-display-container">
+        <div class="w3-container">
+            <h2 style="margin-left: 50px; margin-top:30px">Your order has been placed.</h2>
+            <h3 style="font-size: 320%;margin-left: 100px;"> Thank you!</h3>
+
+        </div>
+        </div>
 </div>
-
-
-
-  <!-- End page content -->
 </div>
-
-
+</div>
 <script>
 // Accordion
 function myAccFuncWomen() {
@@ -118,6 +109,12 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
+}
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
 }
 </script>
 

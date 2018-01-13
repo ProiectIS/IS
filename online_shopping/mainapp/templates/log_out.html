@@ -19,26 +19,26 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>Fashion Du Jour</b></h3></a>
+    <a href="/intro/" class="w3-wide" style="text-decoration:none"><h3><b>Fashion Du Jour</b></h3></a>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
     <a onclick="myAccFuncWomen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnWomen">
       Women <i class="fa fa-caret-down"></i></a>
     <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="/shirts/" class="w3-bar-item w3-button">Shirts</a>
-      <a href="/dresses/" class="w3-bar-item w3-button">Dresses</a>
-      <a href="/sweaters/" class="w3-bar-item w3-button">Sweaters</a>
-      <a href="/coats&jackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
-      <a href="/jeans/" class="w3-bar-item w3-button">Jeans</a>
-      <a href="/skirts/" class="w3-bar-item w3-button">Skirts</a>
+      <a class="w3-bar-item w3-button">Shirts</a>
+      <a class="w3-bar-item w3-button">Dresses</a>
+      <a class="w3-bar-item w3-button">Sweaters</a>
+      <a class="w3-bar-item w3-button">Coats&Jackets</a>
+      <a class="w3-bar-item w3-button">Jeans</a>
+      <a class="w3-bar-item w3-button">Skirts</a>
     </div>
     <a onclick="myAccFuncMen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnMen">
       Men <i class="fa fa-caret-down"></i></a>
     <div id="demoAccMen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="/tshirts/" class="w3-bar-item w3-button">T-Shirts</a>
-      <a href="/hoodies/" class="w3-bar-item w3-button">Sweats&Hoodies</a>
-      <a href="/Mjeans/" class="w3-bar-item w3-button">Jeans</a>
-      <a href="/Mjackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
+      <a class="w3-bar-item w3-button">T-Shirts</a>
+      <a class="w3-bar-item w3-button">Sweats&Hoodies</a>
+      <a class="w3-bar-item w3-button">Jeans</a>
+      <a class="w3-bar-item w3-button">Coats&Jackets</a>
     </div>
   </div>
 </nav>
@@ -52,25 +52,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-      <div style="background-color:black;color:white;padding:20px;">
-       {% if user.username == 'georgiana' %}
-        <p class="w3-right">
-        <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-        <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-        </p>
-          {% else %}
-          {% if user.pk == None %}
-                <p class="w3-right">
-                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
-                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
-                </p>
-          {% else %}
-            <h3 class="w3-right">
-            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My profile /</a>
-            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
-            </h3>
-          {% endif %}
-      {% endif %}
+      <div style="background-color:black;color:white;padding:50px;">
+
       </div>
   </header>
 
@@ -83,10 +66,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <!-- Left Column -->
         <div class="w3-display-container">
         <div class="w3-container">
-            <h2>You have successfully logged out</h2>
-            <button  class="w3-black w3-xlarge">
-            <a href="/main/" style="text-decoration:none;font-size:80%;" > Back to the main page</a>
-            </button>
+            <h2 style="margin-left: 50px; margin-top:30px">You have successfully logged out .</h2>
+            <h3 style="font-size: 320%"> Thank you for visiting us !</h3>
+
         </div>
         </div>
 </div>

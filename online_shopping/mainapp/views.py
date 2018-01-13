@@ -15,6 +15,12 @@ from .forms import CartAddProductForm, OrderCreateForm
 def first_page(request):
     return render(request,'mainapp/main.html',None)
 
+def order_place_succ(request):
+    return render(request,'mainapp/order_place_succ.html',None)
+
+def intro_page(request):
+    return render(request,'mainapp/intro.html',None)
+
 
 def prod_table(request):
     query_results=Product.objects.all()
