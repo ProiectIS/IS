@@ -2,13 +2,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<title>{{ myItem }}</title>
+<title>Fashion du Jour</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -42,77 +43,63 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </div>
 </nav>
+<!-- Top menu on small screens -->
 
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<!--<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:235px">
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
 
+  <!-- Top header -->
+<header class="w3-container w3-xlarge">
+      <div style="background-color:black;color:white;padding:20px;">
+           {% if user.username == 'georgiana' %}
+        <p class="w3-right">
+        <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
+        <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
 
 
-
-
-  <!-- BODY -->
-<ul>
-    <h1><strong>Your shopping cart</strong></h1>
-
-    <div class="row">
-            <table class="cart" border="1">
-                <thead>
-                <tr>
-                    <th width="200">Product</th>
-                    <th width="200">Quantity</th>
-                    <th width="100">Remove</th>
-                   <!-- <th width="100">Size</th> -->
-                    <th width="100">Unit Price</th>
-                    <th width="100">Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in cart %}
-                   {% with product=item.product %}
-                        <tr>
-
-                            <td align="center">{{ product.name }}</td>
-                            <td align="center">
-                            <form action="{% url "mainapp:cart_update" product.productID %}" method = "post">
-                                        {{ item.update_quantity_form.quantity }}
-                                        {{ item.update_quantity_form.update }}
-                                        <input type="submit" value="Update">
-                                        {% csrf_token %}
-                                </form>
-
-                            </td>
-                             <td align="center"><a href="{% url "mainapp:cart_remove" product.productID%}" ><button>Remove</button></a> </td>
-
-                            <td class="num" align="center" >${{ item.price }}</td>
-                            <td class="num" align="center">${{ item.total_price }}></td>
-                        </tr>
-                    {% endwith %}
-                {% endfor %}
-                <tr class="total">
-                    <td height="50" align="center"><strong>TOTAL:</strong></td>
-                    <td colspan="3"></td>
-                    <td class="num" align="center" height="50"><strong>${{ cart.get_total_price }}</strong></td>
-                </tr>
-                </tbody>
-            </table>
-        <!---->
-        <p class="text-right">
-            <a href="/main/" class="w3-top-right" style="text-decoration:none;font-size:150%; margin-right:550px" ><button>Continue shopping </button> </a>
-            <a href="/order_create/" class="button" style="text-decoration:none;font-size:150%;" ><button> Checkout</button> </a>
         </p>
-        </div>
+          {% else %}
+          {% if user.pk == None %}
+                <p class="w3-right">
+                <a href="/register/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Sign up /</a>
+                <a href="/log_in/" class="w3-top-right" style="text-decoration:none;font-size:80%;" > Log in</a>
+                </p>
+          {% else %}
+            <h3 class="w3-right">
+            <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My account /</a>
+            <a href="/cart_detail/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
+            </h3>
+          {% endif %}
+      {% endif %}
+        <h3 class="w3-wide"><b>NEW ARRIVALS!!</b></h3>
+      </div>
+  </header>
+
+    <!------------------------->>
 
 
-</ul>
+
+ <form action="." method="post" class="order-form" style="margin-left:200px">
+     {{form.as_p }}
+     <a href="/main/" class="w3-top-right"><button type="submit" class="w3-black w3-large">PlaceOrder</button></a>
+     <button type="submit" class="w3-black w3-large"><a href="/main/" class="w3-top-right">Main</a></button>
+     {% csrf_token %}
+ </form>
 
 
 
+
+
+
+  <!-- End page content -->
 </div>
-
 
 <script>
 // Accordion
@@ -148,12 +135,6 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
-}
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
 }
 </script>
 

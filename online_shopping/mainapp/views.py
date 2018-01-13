@@ -1,16 +1,20 @@
 from __future__ import unicode_literals
 from django.shortcuts import render,get_object_or_404
-from mainapp.models import Product,Image,Customer
+
+from .models import Product,Image,Customer, Cart, OrderItem, Order
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import RegistrationForm
+from django.views.decorators.http import require_POST
+from .forms import CartAddProductForm, OrderCreateForm
 # Create your views here.
 
 def first_page(request):
     return render(request,'mainapp/main.html',None)
+
 
 def prod_table(request):
     query_results=Product.objects.all()
@@ -19,6 +23,13 @@ def prod_table(request):
 def cust_table(request):
     query_results=Customer.objects.all()
     return render(request,'mainapp/custTable.html',None)
+
+def order_table(request):
+    query_results=Order.objects.all()
+    return render(request,'mainapp/orderTable.html',None)
+
+def main_detail(request):
+    return redirect('first_page')
 #------------------------------------------------------------------
 #---------WOMEN----------------------------------------------------
 def full_page(category):
@@ -211,7 +222,8 @@ def Mjackets_detail(request,Mjacket_id):
 #------------------------------------------------------------------------------
 def cart_page(request):
     return render(request, 'mainapp/cart.html', None)
-
+def order_page(request):
+    return render(request, 'mainapp/order.html', None)
 
 def register(request):
     if request.method=='POST':
@@ -235,6 +247,24 @@ def register(request):
         args={'form':form}
         return render(request,'mainapp/customer_form.html',args)
 
+def place_order(request):
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                first_name = form['first_name'].value()
+                last_name = form['last_name'].value()
+                email = form['email'].value()
+                address = form['address'].value()
+                city = form['city'].value()
+                order = Customer(first_name = first_name,last_name =last_name,email = email,address = address,city = city)
+                order.save()
+                return redirect('/log_in/')
+            else:
+                args = {'form': form}
+                return render(request, 'mainapp/main.html', args)
+
+
 
 
 def profile(request,id):
@@ -253,9 +283,74 @@ def policies(request):
 def contact(request):
     return render(request, 'mainapp/contact.html', None)
 
+#-------order
+
+def order_create(request):
+    cart = Cart(request)
+    if request.method == 'POST':
+        form = OrderCreateForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            for item in cart:
+                OrderItem.objects.create(order=order,
+                                         product=item['product'],
+                                         price=item['price'],
+                                        quantity=item['quantity'])
+            # clear the cart
+            cart.clear()
+            request.session['order_id'] = order.id
+
+
+    else:
+        form = OrderCreateForm()
+    return render(request,
+                  'mainapp/order.html',
+                  {'cart': cart, 'form': form})
+# ----------cart
+
+def cart(request):
+    return{'cart': Cart(request)}
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product,productID=product_id,available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request,'mainapp/detail.html', {'product': product,'cart_product_form': cart_product_form})
 
 
 
+@require_POST
+def cart_update(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, productID=product_id)
+    form = CartAddProductForm(request.POST,product)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(product=product,
+                 quantity=cd['quantity'],
+                 update_quantity=cd['update'])
+        return redirect('mainapp:cart_detail')
+
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, productID=product_id)
+    form = CartAddProductForm(request.POST,product)
+    cart.add(product=product,quantity=1,
+                 update_quantity='true')
+    return redirect('mainapp:cart_detail')
+
+
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, productID=product_id)
+    cart.remove(product)
+    return redirect('mainapp:cart_detail')
+
+
+def cart_detail(request):
+    cart = Cart(request)
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'],'update': True})
+    return render(request, 'mainapp/cart.html',{'cart': cart})
 
 
 

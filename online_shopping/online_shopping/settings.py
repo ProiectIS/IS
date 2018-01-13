@@ -53,6 +53,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'mainapp.context_processor.cart',
             ],
         },
     },
@@ -122,3 +123,5 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL='/main/'
+
+CART_SESSION_ID = 'cart'

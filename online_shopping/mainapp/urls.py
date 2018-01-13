@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$',views.first_page,name='first_page'),
     url(r'^prodTable/',views.prod_table,name='prod_table'),
     url(r'^custTable/', views.cust_table, name='cust_table'),
+    url(r'^orderTable/', views.order_table, name='order_table'),
     url(r'^main/',views.first_page,name='first_page'),
     # women
     url(r'^shirts/(?P<shirt_id>[0-9]+)/$', views.shirt_detail, name='shirt_detail'),
@@ -21,6 +22,7 @@ urlpatterns = [
     url(r'^skirts/(?P<skirt_id>[0-9]+)/$', views.skirt_detail, name='skirt_detail'),
     url(r'^skirts/',views.SkirtsView.as_view(),name='skirts_page'),
     url(r'^cart/',views.cart_page,name='cart_page'),
+    url(r'^order/',views.order_page,name='order_page'),
     #others
     url(r'^register/',views.register,name='register'),
     url(r'^profile/(?P<id>[0-9]+)/$',views.profile,name='profile'),
@@ -38,5 +40,12 @@ urlpatterns = [
     url(r'^Mjeans/', views.MjeansView.as_view(), name='Mjeans_page'),
     url(r'^Mjackets/(?P<Mjacket_id>[0-9]+)/$', views.Mjackets_detail, name='Mjackets_detail'),
     url(r'^Mjackets/', views.MjacketsView.as_view(), name='Mjackets_page'),
+    url(r'^cart_detail/', views.cart_detail, name='cart_detail'),
+    url(r'^add/(?P<product_id>[0-9]+)/$',views.cart_add, name='cart_add'),
+    url(r'^update/(?P<product_id>[0-9]+)/$',views.cart_update, name='cart_update'),
+    url(r'^remove/(?P<product_id>[0-9]+)/$', views.cart_remove, name='cart_remove'),
+    url(r'^order_create/', views.order_create, name='order_create'),
+    url(r'^place_order', views.place_order,name='place_order'),
 
+    url(r'^(?P<product_id>[0-9]+)/$', views.product_detail, name='product_detail')
 ]

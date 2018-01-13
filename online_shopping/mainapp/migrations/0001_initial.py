@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Customer',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('customer_id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('username', models.CharField(max_length=30)),
                 ('first_name', models.CharField(max_length=30)),
                 ('last_name', models.CharField(max_length=30)),
@@ -42,11 +42,15 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=50, unique=True)),
                 ('productID', models.AutoField(primary_key=True, serialize=False)),
                 ('price', models.FloatField()),
-                ('size_XS_amount', models.PositiveIntegerField()),
-                ('size_S_amount', models.PositiveIntegerField()),
-                ('size_M_amount', models.PositiveIntegerField()),
-                ('size_L_amount', models.PositiveIntegerField()),
+                #('size_XS_amount', models.PositiveIntegerField()),
+                #('size_S_amount', models.PositiveIntegerField()),
+                #('size_M_amount', models.PositiveIntegerField()),
+               # ('size_L_amount', models.PositiveIntegerField()),
                 ('description', models.TextField()),
+                #('stock' , models.PositiveIntegerField()),
+                ('available', models.BooleanField(default=True)),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('updated', models.DateTimeField(auto_now=True))
             ],
         ),
         migrations.AddField(

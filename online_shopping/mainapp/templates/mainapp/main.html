@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -72,9 +71,29 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           {% else %}
             <h3 class="w3-right">
             <a href="/profile/{{ user.pk }}" class="w3-top-right" style="text-decoration:none;font-size:80%;" > My account /</a>
-            <a href="/cart/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
+            <a href="/cart_detail/" class="fa fa-shopping-cart w3-top-right" style="text-decoration:none"> </a>
+              <div class="panel panel-default">
+        <div class="panel-heading" style="text-decoration:none;font-size:80%;" >
+            <a href="/cart_detail/"></a>
+            {# call __len__ #}
+            {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                    Your cart:
+
+                        {# If total_items is 1, the output will be 1 item. #}
+                        {# If total_items is 2, the output will be 2 items. #}
+                        {{ total_items }} item{{ total_items|pluralize }},
+                        ${{ cart.get_total_price }}
+                    </a>
+                {% else %}
+                    Your shopping cart is empty.
+                {% endif %}
+            {% endwith %}
+        </div>
             </h3>
           {% endif %}
+
+    </div>
       {% endif %}
         <h3 class="w3-wide"><b>NEW ARRIVALS!!</b></h3>
       </div>
@@ -91,7 +110,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div class="w3-row-padding">
 
-      <div class="w3-col s4">
+      <div class="w3-col s4" style="margin-left:100px">
         <h4>About</h4>
         <p><a href="/stores/">Our stores</a></p>
         <p><a href="/policies/">Purchase policies</a></p>
