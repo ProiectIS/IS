@@ -1,0 +1,126 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>Fashion du Jour</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+    <a href="/main/" class="w3-wide" style="text-decoration:none"><h3><b>FDJ</b></h3></a>
+  </div>
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a onclick="myAccFuncWomen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnWomen">
+      Women <i class="fa fa-caret-down"></i></a>
+    <div id="demoAccWomen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="/shirts/" class="w3-bar-item w3-button">Shirts</a>
+      <a href="/dresses/" class="w3-bar-item w3-button">Dresses</a>
+      <a href="/sweaters/" class="w3-bar-item w3-button">Sweaters</a>
+      <a href="/coats&jackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
+      <a href="/jeans/" class="w3-bar-item w3-button">Jeans</a>
+      <a href="/skirts/" class="w3-bar-item w3-button">Skirts</a>
+    </div>
+    <a onclick="myAccFuncMen()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtnMen">
+      Men <i class="fa fa-caret-down"></i></a>
+    <div id="demoAccMen" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="/tshirts/" class="w3-bar-item w3-button">T-Shirts</a>
+      <a href="/hoodies/" class="w3-bar-item w3-button">Sweats&Hoodies</a>
+      <a href="/Mjeans/" class="w3-bar-item w3-button">Jeans</a>
+      <a href="/Mjackets/" class="w3-bar-item w3-button">Coats&Jackets</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:235px">
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+      <div style="background-color:black;color:white;padding:20px;">
+        <h3 class="w3-wide"><b>CONTACT US</b></h3>
+      </div>
+  </header>
+
+
+  <!-- BODY -->
+<div class="w3-main" style="margin-left:235px;margin-right:0px">
+
+  <!-- The Grid -->
+  <div class="w3-display-position w3-padding " style="top:100px;left:235px">
+      <p>Your questions and comments are important to us. Our customer service team is available to answer any of your questions.
+          Please be advised that our current response time is within 12 business hours.
+      </p>
+      <h2>Email address:</h2>
+      <p > erdei_alexandra23@yahoo.com</p>
+      <p > georgi.maria.96@gmail.com</p>
+
+      <h2>Phone number:</h2>
+      <p> 0747904770</p>
+      <p> 0736264767</p>
+
+      <h4>OPENING HOURS:</h4>
+      <p> Monday to Friday: 7am to 12am</p>
+      <p> Saturday and Sunday: 9am to 12am</p>
+    <button  class="w3-black w3-xlarge">
+            <a href="/main/" style="text-decoration:none;font-size:80%;" > Back to the main page</a>
+    </button>
+  </div>
+</div>
+</div>
+
+
+<script>
+// Accordion
+function myAccFuncWomen() {
+    var x = document.getElementById("demoAccWomen");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+function myAccFuncMen() {
+    var x = document.getElementById("demoAccMen");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+document.getElementById("myBtnWomen").click();
+document.getElementById("myBtnMen").click();
+
+
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+
+</script>
+
+</body>
+</html>
